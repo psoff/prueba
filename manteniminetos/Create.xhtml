@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ManteniminetosCreateDlg" widgetVar="ManteniminetosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateManteniminetosTitle}">
+            <h:form id="ManteniminetosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{manteniminetosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateManteniminetosLabel_idVehiculo}" for="idVehiculo" />
+                        <p:inputText id="idVehiculo" value="#{manteniminetosController.selected.idVehiculo}" title="#{bundle.CreateManteniminetosTitle_idVehiculo}" required="true" requiredMessage="#{bundle.CreateManteniminetosRequiredMessage_idVehiculo}"/>
+                        <p:outputLabel value="#{bundle.CreateManteniminetosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{manteniminetosController.selected.nombre}" title="#{bundle.CreateManteniminetosTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateManteniminetosLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{manteniminetosController.selected.fecha}" title="#{bundle.EditManteniminetosTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateManteniminetosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{manteniminetosController.selected.descripcion}" title="#{bundle.CreateManteniminetosTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateManteniminetosLabel_kilometraje}" for="kilometraje" />
+                        <p:inputText id="kilometraje" value="#{manteniminetosController.selected.kilometraje}" title="#{bundle.CreateManteniminetosTitle_kilometraje}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{manteniminetosController.create}" value="#{bundle.Save}" update="display,:ManteniminetosListForm:datalist,:growl" oncomplete="handleSubmit(args,'ManteniminetosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ManteniminetosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
